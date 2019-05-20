@@ -9,4 +9,7 @@ public class Rectangle {
     this.c = c;
     this.d = d;
   }
+  public double area () {
+    return this.c * this.d;
+  }
 }
