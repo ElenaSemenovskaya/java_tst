@@ -6,13 +6,10 @@ public class FirstProgram {
     hello("Elena");
     hello("User");
 
-    Square s = new Square();
-    s.l = 50;
-    System.out.println("Площадь квадрата со стороной " + s.l + " = " + area1(s));
+    Square s = new Square(50);
+    System.out.println("Площадь квадрата со стороной " + s.l + " = " + area(s));
 
-    Rectangle r = new Rectangle();
-    r.c = 10;
-    r.d = 20;
+    Rectangle r = new Rectangle(10, 20);
     System.out.println("Площадь прямоугольника со сторонами " + r.c + " и " + r.d + " = " + area(r));
   }
 
@@ -24,7 +21,7 @@ public class FirstProgram {
     return r.c * r.d;
   }
 
-  public static double area1 (Square s) {
+  public static double area (Square s) {
     return s.l * s.l;
   }
 
