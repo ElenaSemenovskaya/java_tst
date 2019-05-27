@@ -1,4 +1,4 @@
-package se.tst.sandbox;
+package se.tst.addressbook.sandbox;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
