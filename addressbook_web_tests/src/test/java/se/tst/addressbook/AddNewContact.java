@@ -11,11 +11,11 @@ public class AddNewContact {
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new ChromeDriver();
+    login();
 
   }
 
-  @Test
-  public void testAddNewContact() throws Exception {
+  private void login() {
     wd.get("http://localhost/addressbook/");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
@@ -23,9 +23,26 @@ public class AddNewContact {
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.linkText("add new")).click();
-    wd.findElement(By.name("firstname")).click();
-    wd.findElement(By.name("firstname")).clear();
+  }
+
+  @Test
+  public void testAddNewContact() throws Exception {
+    gotoContactList();
+    initContactCreation();
+    fillContactForm();
+    submit();
+    logout();
+  }
+
+  private void logout() {
+    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void submit() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).sendKeys("Name1");
     wd.findElement(By.name("lastname")).clear();
     wd.findElement(By.name("lastname")).sendKeys("LastName1");
@@ -35,8 +52,15 @@ public class AddNewContact {
     wd.findElement(By.name("home")).sendKeys("tlf1");
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys("mail@mail");
-    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
-    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void initContactCreation() {
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+  }
+
+  private void gotoContactList() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod(alwaysRun = true)
