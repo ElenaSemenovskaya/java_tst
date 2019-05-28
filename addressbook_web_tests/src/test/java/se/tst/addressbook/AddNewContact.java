@@ -11,17 +11,17 @@ public class AddNewContact {
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new ChromeDriver();
-    login();
+    login(new Login("admin", "secret"));
 
   }
 
-  private void login() {
+  private void login(Login login) {
     wd.get("http://localhost/addressbook/");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("user")).sendKeys(login.getUsername());
     wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.name("pass")).sendKeys(login.getPassword());
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
@@ -29,7 +29,7 @@ public class AddNewContact {
   public void testAddNewContact() throws Exception {
     gotoContactList();
     initContactCreation();
-    fillContactForm();
+    fillContactForm(new ContactDate("Name1", "LastName1", "Address", "tlf1", "mail@mail"));
     submit();
     logout();
   }
@@ -42,16 +42,16 @@ public class AddNewContact {
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  private void fillContactForm() {
-    wd.findElement(By.name("firstname")).sendKeys("Name1");
+  private void fillContactForm(ContactDate contact) {
+    wd.findElement(By.name("firstname")).sendKeys(contact.getName());
     wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys("LastName1");
+    wd.findElement(By.name("lastname")).sendKeys(contact.getLastname());
     wd.findElement(By.name("address")).clear();
-    wd.findElement(By.name("address")).sendKeys("Address");
+    wd.findElement(By.name("address")).sendKeys(contact.getAddress());
     wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys("tlf1");
+    wd.findElement(By.name("home")).sendKeys(contact.getTlfn());
     wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys("mail@mail");
+    wd.findElement(By.name("email")).sendKeys(contact.getMail());
   }
 
   private void initContactCreation() {
