@@ -1,8 +1,9 @@
-package se.tst.addressbook;
+package se.tst.addressbook.tests;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
+import se.tst.addressbook.model.ContactDate;
 
 public class AddNewContact {
   private WebDriver wd;

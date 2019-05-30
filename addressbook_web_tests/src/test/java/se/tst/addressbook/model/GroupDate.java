@@ -1,4 +1,4 @@
-package se.tst.addressbook;
+package se.tst.addressbook.model;
 
 public class GroupDate {
   private final String name;

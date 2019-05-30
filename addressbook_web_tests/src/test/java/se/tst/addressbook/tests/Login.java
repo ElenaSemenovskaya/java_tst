@@ -1,4 +1,4 @@
-package se.tst.addressbook;
+package se.tst.addressbook.tests;
 
 public class Login {
   private final String username;
