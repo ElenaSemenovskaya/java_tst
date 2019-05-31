@@ -9,7 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  protected WebDriver wd;
+
+  public WebDriver wd;
 
   private ContactHelper contactHelper;
   private NavigationHelper navigationHelper;
@@ -57,15 +58,12 @@ public class ApplicationManager {
     return groupHelper;
   }
 
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
-  }
-
-  public void gotoContactList() {
-    wd.findElement(By.linkText("add new")).click();
-  }
-
+  
   public ContactHelper getContactHelper() {
     return contactHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
