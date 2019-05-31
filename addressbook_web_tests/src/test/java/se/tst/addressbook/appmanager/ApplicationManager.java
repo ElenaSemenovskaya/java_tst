@@ -43,8 +43,7 @@ public class ApplicationManager {
       return false;
     }
   }
-
-
+  
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
