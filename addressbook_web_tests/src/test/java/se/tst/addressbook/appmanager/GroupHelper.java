@@ -11,6 +11,7 @@ public class GroupHelper {
     this.wd = wd;
 
   }
+
   public void returnToGroupPage() {
     wd.findElement(By.linkText("group page")).click();
   }
