@@ -26,6 +26,13 @@ public class ContactHelper extends HelperBase{
 
   public void initContactCreation() {
     click(By.name("firstname"));
-    click(By.name("firstname"));
+  }
+
+  public void editConact() {
+    click((By.xpath("//img[@alt='Edit']")));
+  }
+
+  public void updateContact() {
+    click((By.xpath("//input[@name='update']")));
   }
 }
