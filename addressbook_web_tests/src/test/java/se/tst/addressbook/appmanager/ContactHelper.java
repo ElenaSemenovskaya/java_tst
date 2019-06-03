@@ -50,21 +50,6 @@ public class ContactHelper extends HelperBase{
   }
 
   public void assertDeleteContact() {
-    acceptNextAlert = true;
-    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-  }
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
+    wd.switchTo().alert().accept();
   }
 }
