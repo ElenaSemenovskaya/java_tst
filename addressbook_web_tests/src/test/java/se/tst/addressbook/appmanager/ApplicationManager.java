@@ -57,12 +57,10 @@ public class ApplicationManager {
       return false;
     }
   }
-  
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
   }
-
 
   public ContactHelper getContactHelper() {
     return contactHelper;
