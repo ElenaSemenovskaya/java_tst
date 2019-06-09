@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import se.tst.addressbook.model.ContactDate;
 
 import static org.testng.Assert.assertTrue;
@@ -21,13 +22,14 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void fillContactForm(ContactDate contact) {
+  public void fillContactForm(ContactDate contact, boolean creation) {
     type(By.name("firstname"), contact.getName());
     type(By.name("lastname"), contact.getLastname());
 
-    if (isElementPresent(By.name("new_group"))) {
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
     } else
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
 
     type(By.name("address"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
