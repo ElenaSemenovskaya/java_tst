@@ -2,7 +2,9 @@ package se.tst.addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import se.tst.addressbook.model.ContactDate;
 
 import static org.testng.Assert.assertTrue;
@@ -22,7 +24,11 @@ public class ContactHelper extends HelperBase{
   public void fillContactForm(ContactDate contact) {
     type(By.name("firstname"), contact.getName());
     type(By.name("lastname"), contact.getLastname());
-    
+
+    if (isElementPresent(By.name("new_group"))) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
+    } else
+
     type(By.name("address"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
     type(By.name("home"), contact.getTlfn());
