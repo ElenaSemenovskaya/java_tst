@@ -14,5 +14,14 @@ public class PrimeTests {
   public void testNonPrime () {
     Assert.assertFalse(Primes.isPrime(Integer.MAX_VALUE - 2));
   }
+  @Test
+  public void testPrimeWhile () {
+    Assert.assertTrue(Primes.isPrimeWhile(Integer.MAX_VALUE));
+  }
+
+  @Test
+  public void testNonPrimeWhile() {
+    Assert.assertFalse(Primes.isPrimeWhile(Integer.MAX_VALUE - 2));
+  }
 
 }
