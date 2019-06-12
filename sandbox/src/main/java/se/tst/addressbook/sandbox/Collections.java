@@ -9,7 +9,7 @@ public class Collections {
     String[] langs = {"Java", "Phyton", "C#", "PHP"};
 
     List<String> languages = Arrays.asList("Java", "Phyton", "C#", "PHP");
-      
+
 
     for (String l : languages) {
       System.out.println("Очень хочу выучить " + l);
