@@ -9,6 +9,7 @@ public class DeleteContactTest extends TestBase{
 
   public void testDeleteContact () {
     app.getNavigationHelper().gotoScrollContact();
+
     if (! app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoContactList();
       app.getContactHelper().createContact(new ContactDate("Name1", "LastName1", "tst10", "Address", "tlf1", "mail@mail"), true);
