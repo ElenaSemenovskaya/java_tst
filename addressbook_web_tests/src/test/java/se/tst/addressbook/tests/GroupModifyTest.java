@@ -4,22 +4,24 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.GroupDate;
 
+import java.util.List;
+
 public class GroupModifyTest extends TestBase {
 
   @Test
   public void testGroupModify () {
     app.getNavigationHelper().gotoGroupPage();
-    int before = app.getGroupHelper().getCountGroup();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupDate("tst4", "tst5", null));
     }
-    app.getGroupHelper().selectGroup(4);
+    List<GroupDate> before = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectGroup(before.size()-3);
     app.getGroupHelper().initGroupModify();
     app.getGroupHelper().fillGroupForm(new GroupDate("tst10", null, null));
     app.getGroupHelper().submitGroupModify();
     app.getGroupHelper().returnToGroupPage();
-    int after = app.getGroupHelper().getCountGroup();
-    Assert.assertEquals(after, before);
+    List<GroupDate> after = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(after.size(), before.size());
     app.logout();
   }
 }
