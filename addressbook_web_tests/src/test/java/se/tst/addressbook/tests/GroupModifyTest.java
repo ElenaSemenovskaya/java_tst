@@ -28,9 +28,9 @@ public class GroupModifyTest extends TestBase {
 
     before.remove(before.size()-1);
     before.add(group);
-      Comparator<? super GroupDate> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-      before.sort(byId);
-      after.sort(byId);
+    Comparator<? super GroupDate> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
     Assert.assertEquals(before, after);
 
     app.logout();
