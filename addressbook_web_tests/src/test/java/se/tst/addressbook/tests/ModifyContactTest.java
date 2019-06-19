@@ -20,14 +20,12 @@ public class ModifyContactTest extends TestBase {
   }
   List<ContactDate> before = app.getContactHelper().getContactList();
   app.getContactHelper().editConact(before.size()-1);
-  ContactDate contact = new ContactDate("Name1", "LastName1", null, "Address1", null, null);
+  ContactDate contact = new ContactDate(before.get(before.size()-1).getId(), "Name1", "LastName1", null, "Address1", null, null);
   app.getContactHelper().fillContactForm(contact, false);
   app.getContactHelper().updateContact();
   app.getContactHelper().gotoHomePage();
   List<ContactDate> after = app.getContactHelper().getContactList();
   Assert.assertEquals(after.size(), before.size());
-
-
   before.remove(before.size()-1);
   before.add(contact);
   Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
