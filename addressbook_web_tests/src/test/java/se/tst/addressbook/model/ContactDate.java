@@ -1,5 +1,7 @@
 package se.tst.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactDate {
   private final String name;
   private final String lastname;
@@ -16,6 +18,8 @@ public class ContactDate {
     this.tlfn = tlfn;
     this.mail = mail;
   }
+
+
 
   public String getName() {
     return name;
@@ -40,4 +44,31 @@ public class ContactDate {
   public String getGroup() {
     return group;
   }
+
+  @Override
+  public String toString() {
+    return "ContactDate{" +
+            "name='" + name + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            '}';
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactDate that = (ContactDate) o;
+    return Objects.equals(name, that.name) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(address, that.address);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, lastname, address);
+  }
+
+
 }
