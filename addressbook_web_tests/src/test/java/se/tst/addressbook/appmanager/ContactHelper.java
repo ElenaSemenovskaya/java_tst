@@ -42,16 +42,16 @@ public class ContactHelper extends HelperBase{
     click(By.name("firstname"));
   }
 
-  public void editConact() {
-    click((By.xpath("//img[@alt='Edit']")));
+  public void editConact(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
   public void updateContact() {
     click((By.xpath("//input[@name='update']")));
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteContact() {
