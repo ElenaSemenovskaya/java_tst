@@ -22,7 +22,7 @@ public class ContactDate {
   }
 
   public ContactDate(String name, String lastname, String group, String address, String tlfn, String mail) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.lastname = lastname;
     this.group = group;
@@ -73,19 +73,19 @@ public class ContactDate {
     return group;
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactDate that = (ContactDate) o;
-    return id == that.id &&
-            Objects.equals(name, that.name) &&
+    return Objects.equals(name, that.name) &&
             Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, lastname);
+    return Objects.hash(name, lastname);
   }
 
 
