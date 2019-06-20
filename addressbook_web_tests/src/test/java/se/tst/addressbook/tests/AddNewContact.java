@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -19,14 +20,8 @@ public class AddNewContact extends TestBase{
     List<ContactDate> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() +1);
 
+    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
     before.add(contact);
-    int max = 0;
-    for (ContactDate c : after){
-      if (c.getId() > max) {
-        max = c.getId();
-      }
-    }
-    contact.setId(max);
     Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
     app.logout();
   }
