@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,7 +29,10 @@ public class ModifyContactTest extends TestBase {
   Assert.assertEquals(after.size(), before.size());
   before.remove(before.size()-1);
   before.add(contact);
-  Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
+  Comparator<? super ContactDate> byId = ((c1, c2) -> Integer.compare(c1.getId(), c2.getId()));
+  before.sort(byId);
+  after.sort(byId);
+  Assert.assertEquals(after, before);
   app.logout();
 
 }
