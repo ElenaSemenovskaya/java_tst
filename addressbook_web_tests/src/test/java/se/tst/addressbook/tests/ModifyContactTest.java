@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ModifyContactTest extends TestBase {
 
-@Test
+@Test (enabled = false)
 
   public void testModifyContact () {
   app.getNavigationHelper().gotoScrollContact();

@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import se.tst.addressbook.model.GroupDate;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 
