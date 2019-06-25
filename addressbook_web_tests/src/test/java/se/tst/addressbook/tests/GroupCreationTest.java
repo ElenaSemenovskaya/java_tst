@@ -5,8 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.GroupDate;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 
 public class GroupCreationTest extends TestBase {
@@ -15,16 +14,14 @@ public class GroupCreationTest extends TestBase {
   @Test
   public void testGroupCreation() throws Exception {
     app.goTo().GroupPage();
-    List<GroupDate> before = app.group().list();
+    Set<GroupDate> before = app.group().all();
     GroupDate group = new GroupDate().withName("tst40");
     app.group().create(group);
-    List<GroupDate> after = app.group().list();
+    Set<GroupDate> after = app.group().all();
     Assert.assertEquals(after.size(), before.size() + 1);
-    group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+
+    group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
     before.add(group);
-    Comparator<? super GroupDate> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
 
   }
