@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ModifyContactTest extends TestBase {
@@ -13,11 +12,11 @@ public class ModifyContactTest extends TestBase {
 @Test (enabled = false)
 
   public void testModifyContact () {
-  app.getNavigationHelper().gotoScrollContact();
+  app.goTo().gotoScrollContact();
   if (! app.getContactHelper().isThereAContact()) {
-    app.getNavigationHelper().gotoContactList();
+    app.goTo().gotoContactList();
     app.getContactHelper().createContact(new ContactDate("Name", "LastName", "tst10", "Address", "tlf", "mail@mail"), true);
-    app.getNavigationHelper().gotoScrollContact();
+    app.goTo().gotoScrollContact();
   }
   List<ContactDate> before = app.getContactHelper().getContactList();
   app.getContactHelper().editConact(before.size()-1);
