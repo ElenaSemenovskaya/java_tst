@@ -10,7 +10,7 @@ import java.util.List;
 public class AddNewContact extends TestBase{
 
 
-  @Test(enabled = false)
+  @Test
   public void testAddNewContact() throws Exception {
     List<ContactDate> before = app.getContactHelper().getContactList();
     app.goTo().gotoContactList();
@@ -24,7 +24,7 @@ public class AddNewContact extends TestBase{
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(after, before);
-    app.logout();
+
   }
 
 

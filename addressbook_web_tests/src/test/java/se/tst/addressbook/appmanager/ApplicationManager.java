@@ -57,12 +57,10 @@ public class ApplicationManager {
       return false;
     }
   }
-  
 
   public GroupHelper group() {
     return groupHelper;
   }
-
 
   public ContactHelper getContactHelper() {
     return contactHelper;
@@ -71,6 +69,5 @@ public class ApplicationManager {
   public NavigationHelper goTo() {
     return navigationHelper;
   }
-
 
 }

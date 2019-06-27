@@ -58,6 +58,13 @@ public class ContactHelper extends HelperBase{
     click((By.xpath("//input[@value='Delete']")));
   }
 
+  public void modifyContact(int index, ContactDate contact) {
+    editConact(index);
+    fillContactForm(contact, false);
+    updateContact();
+    gotoHomePage();
+  }
+
   public void assertDeleteContact() {
     wd.switchTo().alert().accept();
   }
@@ -95,4 +102,6 @@ public class ContactHelper extends HelperBase{
 
       return contacts;
     }
+
+
 }
