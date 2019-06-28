@@ -15,7 +15,8 @@ public class ModifyContactTest extends TestBase {
     app.goTo().scrollContact();
     if (app.contact().list().size() == 0) {
       app.goTo().contactList();
-      app.contact().create(new ContactDate("Name", "LastName", "tst10", "Address", "tlf", "mail@mail"), true);
+      app.contact().create(new ContactDate().
+              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail"), true);
       app.goTo().scrollContact();
     }
   }
@@ -24,7 +25,8 @@ public class ModifyContactTest extends TestBase {
   public void testModifyContact () {
   List<ContactDate> before = app.contact().list();
   int index = before.size()-1;
-  ContactDate contact = new ContactDate(before.get(index).getId(), "Name1", "LastName1", null, "Address1", null, null);
+  ContactDate contact = new ContactDate().
+          withId(before.get(index).getId()).withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail");
   app.contact().modify(index, contact);
   List<ContactDate> after = app.contact().list();
   Assert.assertEquals(after.size(), before.size());

@@ -14,7 +14,8 @@ public class AddNewContact extends TestBase{
   public void testAddNewContact() throws Exception {
     List<ContactDate> before = app.contact().list();
     app.goTo().contactList();
-    ContactDate contact = new ContactDate("Name1", "LastName1", "tst10", "Address", "tlf1", "mail@mail");
+    ContactDate contact = new ContactDate().
+            withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail");
     app.contact().create(contact, true);
     List<ContactDate> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() +1);

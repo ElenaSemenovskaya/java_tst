@@ -4,40 +4,53 @@ import java.util.Objects;
 
 public class ContactDate {
   private int id;
-  private final String name;
-  private final String lastname;
+  private String name;
+  private String lastname;
   private String group;
-  private final String address;
-  private final String tlfn;
-  private final String mail;
+  private String address;
+  private String tlfn;
+  private String mail;
 
-  public ContactDate(int id, String name, String lastname, String group, String address, String tlfn, String mail) {
-    this.id = id;
-    this.name = name;
-    this.lastname = lastname;
-    this.group = group;
-    this.address = address;
-    this.tlfn = tlfn;
-    this.mail = mail;
-  }
-
-  public ContactDate(String name, String lastname, String group, String address, String tlfn, String mail) {
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.lastname = lastname;
-    this.group = group;
-    this.address = address;
-    this.tlfn = tlfn;
-    this.mail = mail;
-  }
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactDate withId(int id) {
     this.id = id;
+    return this;
   }
+
+  public ContactDate withName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public ContactDate withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactDate withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
+  public ContactDate withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactDate withTlfn(String tlfn) {
+    this.tlfn = tlfn;
+    return this;
+  }
+
+  public ContactDate withMail(String mail) {
+    this.mail = mail;
+    return this;
+  }
+
 
   @Override
   public String toString() {

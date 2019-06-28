@@ -15,7 +15,8 @@ public class DeleteContactTest extends TestBase{
     app.goTo().scrollContact();
     if (app.contact().list().size() == 0) {
       app.goTo().contactList();
-      app.contact().create(new ContactDate("Name1", "LastName1", "tst10", "Address", "tlf1", "mail@mail"), true);
+      app.contact().create(new ContactDate().
+              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail"), true);
       app.goTo().scrollContact();
     }
   }
