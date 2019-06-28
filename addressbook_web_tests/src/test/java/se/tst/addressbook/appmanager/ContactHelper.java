@@ -58,7 +58,7 @@ public class ContactHelper extends HelperBase{
     click((By.xpath("//input[@value='Delete']")));
   }
 
-  public void modifyContact(int index, ContactDate contact) {
+  public void modify(int index, ContactDate contact) {
     editConact(index);
     fillContactForm(contact, false);
     updateContact();
@@ -69,11 +69,18 @@ public class ContactHelper extends HelperBase{
     wd.switchTo().alert().accept();
   }
 
-  public void createContact(ContactDate contact, boolean b) {
+  public void create(ContactDate contact, boolean b) {
     initContactCreation();
     fillContactForm(contact, b);
     submit();
     gotoHomePage();
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteContact();
+    assertDeleteContact();
+
   }
 
   public void gotoHomePage() {
@@ -88,7 +95,7 @@ public class ContactHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-    public List<ContactDate> getContactList() {
+    public List<ContactDate> list() {
       List<ContactDate> contacts = new ArrayList<ContactDate>();
       List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
       for (WebElement element : elements) {

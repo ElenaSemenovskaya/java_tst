@@ -19,11 +19,11 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void gotoContactList() {
+  public void contactList() {
     click(By.linkText("add new"));
   }
 
-  public void gotoScrollContact() {
+  public void scrollContact() {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
