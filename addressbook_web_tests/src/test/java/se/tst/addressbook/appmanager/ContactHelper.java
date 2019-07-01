@@ -48,6 +48,11 @@ public class ContactHelper extends HelperBase{
     wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
+  private void editContactById(int id) {
+    wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"']")).click();
+  }
+
+
   public void updateContact() {
     click((By.xpath("//input[@name='update']")));
   }
@@ -64,12 +69,13 @@ public class ContactHelper extends HelperBase{
     click((By.xpath("//input[@value='Delete']")));
   }
 
-  public void modify(int index, ContactDate contact) {
-    editConact(index);
+  public void modify(ContactDate contact) {
+    editContactById(contact.getId());
     fillContactForm(contact, false);
     updateContact();
     gotoHomePage();
   }
+
 
   public void assertDeleteContact() {
     wd.switchTo().alert().accept();
