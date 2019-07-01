@@ -62,6 +62,7 @@ public class ContactDate {
             '}';
   }
 
+
   public String getName() {
     return name;
   }
@@ -86,20 +87,19 @@ public class ContactDate {
     return group;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactDate that = (ContactDate) o;
-    return Objects.equals(name, that.name) &&
+    return id == that.id &&
+            Objects.equals(name, that.name) &&
             Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, lastname);
+    return Objects.hash(id, name, lastname);
   }
-
 
 }

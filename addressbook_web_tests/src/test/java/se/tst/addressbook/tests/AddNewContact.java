@@ -6,24 +6,23 @@ import se.tst.addressbook.model.ContactDate;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class AddNewContact extends TestBase{
 
 
   @Test
   public void testAddNewContact() throws Exception {
-    List<ContactDate> before = app.contact().list();
+    Set<ContactDate> before = app.contact().all();
     app.goTo().contactList();
     ContactDate contact = new ContactDate().
             withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail");
     app.contact().create(contact, true);
-    List<ContactDate> after = app.contact().list();
+    Set<ContactDate> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() +1);
 
+    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
     before.add(contact);
-    Comparator<? super ContactDate> byId = ((c1, c2) -> Integer.compare(c1.getId(), c2.getId()));
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(after, before);
 
   }
