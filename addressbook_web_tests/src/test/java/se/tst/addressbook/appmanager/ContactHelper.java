@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import se.tst.addressbook.model.ContactDate;
+import se.tst.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -114,21 +115,8 @@ public class ContactHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-    public List<ContactDate> list() {
-      List<ContactDate> contacts = new ArrayList<ContactDate>();
-      List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
-      for (WebElement element : elements) {
-        String name = element.findElement(By.xpath(".//td[3]")).getText();
-        String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-        String address = element.findElement(By.xpath(".//td[4]")).getText();
-        int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-        contacts.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address));
-      }
-
-      return contacts;
-    }
-    public Set<ContactDate> all() {
-    Set<ContactDate> contacts = new HashSet<ContactDate>();
+  public List<ContactDate> list() {
+    List<ContactDate> contacts = new ArrayList<ContactDate>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
       String name = element.findElement(By.xpath(".//td[3]")).getText();
@@ -138,6 +126,18 @@ public class ContactHelper extends HelperBase{
       contacts.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address));
     }
 
+    return contacts;
+  }
+  public Contacts all() {
+    Contacts contacts = new Contacts();
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
+    for (WebElement element : elements) {
+      String name = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String address = element.findElement(By.xpath(".//td[4]")).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      contacts.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address));
+    }
     return contacts;
   }
 
