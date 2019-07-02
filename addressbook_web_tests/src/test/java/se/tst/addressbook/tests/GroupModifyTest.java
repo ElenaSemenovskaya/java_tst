@@ -30,8 +30,8 @@ public class GroupModifyTest extends TestBase {
     GroupDate group = new GroupDate()
             .withId(modifedGroup.getId()).withName("tst10"). withHeader("tst11"). withFooter("tst12");
     app.group().modify(group);
+    assertEquals(app.group().count(), before.size());
     Groups after = app.group().all();
-    assertEquals(after.size(), before.size());
     assertThat(after, CoreMatchers.equalTo(before.without(modifedGroup).withAdded(group)));
 
   }
