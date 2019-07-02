@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import se.tst.addressbook.model.GroupDate;
 import se.tst.addressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase{
 
@@ -56,6 +54,7 @@ public class GroupHelper extends HelperBase{
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupCache = null;
     returnToGroupPage();
   }
 
@@ -64,6 +63,7 @@ public class GroupHelper extends HelperBase{
     initGroupModify();
     fillGroupForm(group);
     submitGroupModify();
+    groupCache = null;
     returnToGroupPage();
   }
 
@@ -71,6 +71,7 @@ public class GroupHelper extends HelperBase{
   public void delete(GroupDate group) {
     selectGroupById(group.getId());
     deleteSelectedGroups();
+    groupCache = null;
     returnToGroupPage();
 
   }
@@ -83,16 +84,21 @@ public class GroupHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Groups groupCache = null;
 
   public Groups all() {
-    Groups groups = new Groups();
+    if (groupCache != null) {
+      return new Groups(groupCache);
+    }
+
+    groupCache = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element: elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupDate().withId(id).withName(name));
+      groupCache.add(new GroupDate().withId(id).withName(name));
     }
-    return groups;
+    return new Groups(groupCache);
   }
 
 
