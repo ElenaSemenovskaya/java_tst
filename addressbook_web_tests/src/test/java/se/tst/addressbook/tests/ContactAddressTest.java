@@ -29,14 +29,8 @@ public class ContactAddressTest extends TestBase {
         ContactDate contact = app.contact().all().iterator().next();
         ContactDate contactInfoFromEditForm = app.contact().infoFormEditForm(contact);
 
-        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
 
-    }
-
-    private String mergeAddress(ContactDate contact) {
-        return Arrays.asList(contact.getAddress())
-                .stream().filter((s) -> !s.equals(""))
-                .collect(Collectors.joining("\n"));
     }
 
 }
