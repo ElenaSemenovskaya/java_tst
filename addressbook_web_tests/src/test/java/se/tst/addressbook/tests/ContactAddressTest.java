@@ -1,6 +1,5 @@
 package se.tst.addressbook.tests;
 
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
@@ -11,8 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
-public class ContactPhoneTest extends TestBase{
+public class ContactAddressTest extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition () {
@@ -26,23 +24,20 @@ public class ContactPhoneTest extends TestBase{
     }
 
     @Test
-    public void testContactPhones (){
+    public void testContactAddress (){
         app.goTo().scrollContact();
         ContactDate contact = app.contact().all().iterator().next();
         ContactDate contactInfoFromEditForm = app.contact().infoFormEditForm(contact);
 
-        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
 
     }
 
-    private String mergePhones(ContactDate contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+    private String mergeAddress(ContactDate contact) {
+        return Arrays.asList(contact.getAddress())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneTest::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String cleaned (String phone) {
-        return phone.replaceAll("\\s", "").replaceAll("[-()/]", "");
-    }
 }
+

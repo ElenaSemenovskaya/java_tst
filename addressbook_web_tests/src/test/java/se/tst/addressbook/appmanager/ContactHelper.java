@@ -155,12 +155,13 @@ public class ContactHelper extends HelperBase{
     initContactModificationById(contact.getId());
     String name = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
     String tlfnhome = wd.findElement(By.name("home")).getAttribute("value");
     String tlfnmobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String tlfnwork = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
     return new ContactDate()
-            .withId(contact.getId()).withName(name).withLastname(lastname)
+            .withId(contact.getId()).withName(name).withLastname(lastname).withAddress(address)
             .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork);
 
   }
