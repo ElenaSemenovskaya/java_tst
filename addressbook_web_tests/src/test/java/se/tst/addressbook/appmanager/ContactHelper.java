@@ -34,7 +34,7 @@ public class ContactHelper extends HelperBase{
 
     type(By.name("address"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
-    type(By.name("home"), contact.getTlfnhome());
+    type(By.name("home"), contact.getHomePhone());
     type(By.name("email"),contact.getMail());
 
   }
@@ -136,15 +136,16 @@ public class ContactHelper extends HelperBase{
     if (contactCache != null) {
       return new Contacts(contactCache);
     }
-
     contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
       String name = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String address = element.findElement(By.xpath(".//td[4]")).getText();
+      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address));
+      contactCache.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
     }
     return new Contacts(contactCache);
   }

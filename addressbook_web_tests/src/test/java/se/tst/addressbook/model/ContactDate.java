@@ -19,6 +19,39 @@ public class ContactDate {
     return id;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getLastname() {
+    return lastname;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public String getHomePhone() {
+    return tlfnhome;
+  }
+
+  public String getMobilePhone() {
+    return tlfnmobile;
+  }
+
+  public String getWorkPhone() {
+    return tlfnwork;
+  }
+
+  public String getMail() {
+    return mail;
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+
   public ContactDate withId(int id) {
     this.id = id;
     return this;
@@ -76,29 +109,6 @@ public class ContactDate {
   }
 
 
-  public String getName() {
-    return name;
-  }
-
-  public String getLastname() {
-    return lastname;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public String getTlfnhome() {
-    return tlfnhome;
-  }
-
-  public String getMail() {
-    return mail;
-  }
-
-  public String getGroup() {
-    return group;
-  }
 
   @Override
   public boolean equals(Object o) {
