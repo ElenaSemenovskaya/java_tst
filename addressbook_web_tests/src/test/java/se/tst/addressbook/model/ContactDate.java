@@ -13,6 +13,7 @@ public class ContactDate {
   private String tlfnmobile;
   private String tlfnwork;
   private String mail;
+  private String allPhones;
 
 
   public int getId() {
@@ -51,6 +52,9 @@ public class ContactDate {
     return group;
   }
 
+  public String getAllPhones() {
+    return allPhones;
+  }
 
   public ContactDate withId(int id) {
     this.id = id;
@@ -89,6 +93,11 @@ public class ContactDate {
 
   public ContactDate withWorkPhone(String tlfnwork) {
     this.tlfnwork = tlfnwork;
+    return this;
+  }
+
+  public ContactDate withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 
