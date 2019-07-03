@@ -1,6 +1,5 @@
 package se.tst.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
@@ -18,7 +17,7 @@ public class ModifyContactTest extends TestBase {
     if (app.contact().list().size() == 0) {
       app.goTo().contactList();
       app.contact().create(new ContactDate().
-              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail"), true);
+              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withHomePhone("4444").withMail("mail@mail"), true);
       app.goTo().scrollContact();
     }
   }
@@ -28,7 +27,7 @@ public class ModifyContactTest extends TestBase {
   Contacts before = app.contact().all();
   ContactDate modifiedContact = before.iterator().next();
   ContactDate contact = new ContactDate().
-          withId(modifiedContact.getId()).withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail");
+          withId(modifiedContact.getId()).withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withHomePhone("5555").withMail("mail@mail");
   app.contact().modify(contact);
   assertEquals(app.contact().count(), before.size());
   Contacts after = app.contact().all();

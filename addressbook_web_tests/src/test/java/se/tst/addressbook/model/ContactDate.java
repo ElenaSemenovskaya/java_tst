@@ -3,12 +3,15 @@ package se.tst.addressbook.model;
 import java.util.Objects;
 
 public class ContactDate {
+
   private int id;
   private String name;
   private String lastname;
   private String group;
   private String address;
-  private String tlfn;
+  private String tlfnhome;
+  private String tlfnmobile;
+  private String tlfnwork;
   private String mail;
 
 
@@ -41,8 +44,18 @@ public class ContactDate {
     return this;
   }
 
-  public ContactDate withTlfn(String tlfn) {
-    this.tlfn = tlfn;
+  public ContactDate withHomePhone(String tlfnhome) {
+    this.tlfnhome = tlfnhome;
+    return this;
+  }
+
+  public ContactDate withMobilePhone(String tlfnmobile) {
+    this.tlfnmobile = tlfnmobile;
+    return this;
+  }
+
+  public ContactDate withWorkPhone(String tlfnwork) {
+    this.tlfnwork = tlfnwork;
     return this;
   }
 
@@ -75,8 +88,8 @@ public class ContactDate {
     return address;
   }
 
-  public String getTlfn() {
-    return tlfn;
+  public String getTlfnhome() {
+    return tlfnhome;
   }
 
   public String getMail() {

@@ -9,9 +9,7 @@ import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -36,7 +34,7 @@ public class ContactHelper extends HelperBase{
 
     type(By.name("address"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
-    type(By.name("home"), contact.getTlfn());
+    type(By.name("home"), contact.getTlfnhome());
     type(By.name("email"),contact.getMail());
 
   }
@@ -152,5 +150,21 @@ public class ContactHelper extends HelperBase{
   }
 
 
+  public ContactDate infoFormEditForm(ContactDate contact) {
+    initContactModificationById(contact.getId());
+    String name = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String tlfnhome = wd.findElement(By.name("home")).getAttribute("value");
+    String tlfnmobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String tlfnwork = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactDate()
+            .withId(contact.getId()).withName(name).withLastname(lastname)
+            .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork);
 
+  }
+
+  private void initContactModificationById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+  }
 }

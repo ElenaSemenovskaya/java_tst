@@ -1,15 +1,9 @@
 package se.tst.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
-
-import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +18,7 @@ public class DeleteContactTest extends TestBase{
     if (app.contact().list().size() == 0) {
       app.goTo().contactList();
       app.contact().create(new ContactDate().
-              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withTlfn("tlf1").withMail("mail@mail"), true);
+              withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withHomePhone("2222").withMail("mail@mail"), true);
       app.goTo().scrollContact();
     }
   }
