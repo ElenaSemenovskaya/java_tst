@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class ContactPhoneAddressMailTest extends TestBase{
+public class ContactPhoneTest extends TestBase{
 
     @BeforeMethod
     public void ensurePrecondition () {
@@ -32,21 +32,14 @@ public class ContactPhoneAddressMailTest extends TestBase{
         ContactDate contactInfoFromEditForm = app.contact().infoFormEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-        assertThat(contact.getAllMail(), equalTo(mergeMail(contactInfoFromEditForm)));
 
     }
 
     private String mergePhones(ContactDate contact) {
         return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
                 .stream().filter((s) -> !s.equals(""))
-                .map(ContactPhoneAddressMailTest::cleaned)
+                .map(ContactPhoneTest::cleaned)
                 .collect(Collectors.joining("\n"));
-    }
-
-    private String mergeMail(ContactDate contact) {
-        return Arrays.asList(contact.getMail(), contact.getMail2(), contact.getMail3())
-                .stream().collect(Collectors.joining());
     }
 
     public static String cleaned (String phone) {
