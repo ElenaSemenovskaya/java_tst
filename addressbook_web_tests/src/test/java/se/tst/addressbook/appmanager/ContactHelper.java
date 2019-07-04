@@ -10,6 +10,8 @@ import se.tst.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase{
 
@@ -143,9 +145,11 @@ public class ContactHelper extends HelperBase{
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String address = element.findElement(By.xpath(".//td[4]")).getText();
       String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+      String allmail = element.findElement(By.xpath(".//td[5]")).findElements(By.tagName("a")).stream().map(WebElement::getText).collect(Collectors.joining());
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       contactCache.add(new ContactDate().withId(id).withName(name).withLastname(lastname).withAddress(address)
-              .withAllPhones(allPhones));
+              .withAllPhones(allPhones)
+              .withAllMail(allmail));
     }
     return new Contacts(contactCache);
   }
@@ -159,10 +163,14 @@ public class ContactHelper extends HelperBase{
     String tlfnhome = wd.findElement(By.name("home")).getAttribute("value");
     String tlfnmobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String tlfnwork = wd.findElement(By.name("work")).getAttribute("value");
+    String mail = wd.findElement(By.name("email")).getAttribute("value");
+    String mail2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String mail3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactDate()
             .withId(contact.getId()).withName(name).withLastname(lastname).withAddress(address)
-            .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork);
+            .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork)
+            .withMail(mail).withMail2(mail2).withMail3(mail3);
 
   }
 

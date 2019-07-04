@@ -17,6 +17,7 @@ public class AddNewContact extends TestBase{
     ContactDate contact = new ContactDate().
             withName("Name1").withLastname("LastName1").withGroup("tst10").withAddress("Address").withHomePhone("1111").withMail("mail@mail");
     app.contact().create(contact, true);
+
     assertThat(app.contact().count(), equalTo(before.size() +1));
     Contacts after = app.contact().all();
 

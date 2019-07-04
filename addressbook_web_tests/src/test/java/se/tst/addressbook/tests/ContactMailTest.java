@@ -4,10 +4,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddressTest extends TestBase {
+public class ContactMailTest extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition () {
@@ -21,13 +24,18 @@ public class ContactAddressTest extends TestBase {
     }
 
     @Test
-    public void testContactAddress (){
+    public void testContactMail (){
         app.goTo().scrollContact();
         ContactDate contact = app.contact().all().iterator().next();
         ContactDate contactInfoFromEditForm = app.contact().infoFormEditForm(contact);
-        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+        assertThat(contact.getAllMail(), equalTo(mergeMail(contactInfoFromEditForm)));
 
     }
 
-}
+    private String mergeMail(ContactDate contact) {
+        return Arrays.asList(contact.getMail(), contact.getMail2(), contact.getMail3())
+                .stream().collect(Collectors.joining());
+    }
 
+
+}

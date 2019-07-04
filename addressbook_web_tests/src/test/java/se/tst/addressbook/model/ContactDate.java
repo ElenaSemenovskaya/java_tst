@@ -12,8 +12,12 @@ public class ContactDate {
   private String tlfnhome;
   private String tlfnmobile;
   private String tlfnwork;
-  private String mail;
   private String allPhones;
+  private String mail;
+  private String mail2;
+  private String mail3;
+  private String allMail;
+
 
 
   public int getId() {
@@ -46,6 +50,18 @@ public class ContactDate {
 
   public String getMail() {
     return mail;
+  }
+
+  public String getMail2() {
+    return mail2;
+  }
+
+  public String getMail3() {
+    return mail3;
+  }
+
+  public String getAllMail() {
+    return allMail;
   }
 
   public String getGroup() {
@@ -105,6 +121,22 @@ public class ContactDate {
     this.mail = mail;
     return this;
   }
+
+  public ContactDate withMail2(String mail2) {
+    this.mail2 = mail2;
+    return this;
+  }
+
+  public ContactDate withMail3(String mail3) {
+    this.mail3 = mail3;
+    return this;
+  }
+
+  public ContactDate withAllMail(String allMail) {
+    this.allMail = allMail;
+    return this;
+  }
+
 
 
   @Override
