@@ -1,5 +1,6 @@
 package se.tst.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactDate {
@@ -17,8 +18,12 @@ public class ContactDate {
   private String mail2;
   private String mail3;
   private String allMail;
+  private File photo;
 
 
+  public File getPhoto() {
+    return photo;
+  }
 
   public int getId() {
     return id;
@@ -136,6 +141,12 @@ public class ContactDate {
     this.allMail = allMail;
     return this;
   }
+
+  public ContactDate withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
+
 
 
 
