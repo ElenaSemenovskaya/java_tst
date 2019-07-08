@@ -156,7 +156,7 @@ public class ContactDate {
             "id='" + id + '\'' +
             ", name='" + name + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
+            ", group='" + group + '\'' +
             '}';
   }
 

@@ -49,7 +49,7 @@ public class GroupDataGenerator {
     private List<GroupDate> generateGroups(int count) {
         List<GroupDate>  groups = new ArrayList<GroupDate>();
         for (int i = 0; i < count; i ++)
-            groups.add(new GroupDate().withName(String.format("Name %s", i)).withHeader(String.format("Header %s", i))
+            groups.add(new GroupDate().withName(String.format("Group %s", i)).withHeader(String.format("Header %s", i))
                     .withFooter(String.format("Footer %s", i)));
         return groups;
     }
