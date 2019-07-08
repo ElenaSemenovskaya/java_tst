@@ -35,7 +35,6 @@ public class ContactHelper extends HelperBase{
     } else
       Assert.assertFalse(isElementPresent(By.name("new_group")));
 
-    type(By.name("address"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
     type(By.name("home"), contact.getHomePhone());
     type(By.name("email"),contact.getMail());
