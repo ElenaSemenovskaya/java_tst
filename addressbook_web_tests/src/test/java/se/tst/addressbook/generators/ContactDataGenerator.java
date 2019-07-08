@@ -1,7 +1,6 @@
 package se.tst.addressbook.generators;
 
 import se.tst.addressbook.model.ContactDate;
-import se.tst.addressbook.model.GroupDate;
 
 import java.io.File;
 import java.io.FileWriter;
