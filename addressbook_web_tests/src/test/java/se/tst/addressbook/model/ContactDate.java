@@ -1,10 +1,15 @@
 package se.tst.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
-public class ContactDate {
+@XStreamAlias("contact")
 
+public class ContactDate {
+  @XStreamOmitField
   private int id;
   private String name;
   private String lastname;
@@ -147,9 +152,6 @@ public class ContactDate {
     return this;
   }
 
-
-
-
   @Override
   public String toString() {
     return "ContactDate{" +
@@ -159,8 +161,6 @@ public class ContactDate {
             ", group='" + group + '\'' +
             '}';
   }
-
-
 
   @Override
   public boolean equals(Object o) {
