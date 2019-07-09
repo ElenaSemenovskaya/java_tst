@@ -12,5 +12,18 @@ dependencies {
     compile 'org.hamcrest:hamcrest:2.1'
     compile 'com.beust:jcommander:1.72'
     compile 'com.thoughtworks.xstream:xstream:1.4.11.1'
+}
 
+task testContacts (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testing_contacts.xml'
+    }
+    systemProperty 'browser', "${browser}"
+}
+
+task testGroups (type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testing_groups.xml'
+    }
+    systemProperty 'browser', "${browser}"
 }
