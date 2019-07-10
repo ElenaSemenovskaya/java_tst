@@ -16,14 +16,24 @@ dependencies {
 
 task testContacts (type: Test) {
     useTestNG {
-        suites 'src/test/resources/testing_contacts.xml'
+        suites 'src/test/resources/testng_contacts.xml'
     }
-    systemProperty 'browser', "${browser}"
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
 }
 
 task testGroups (type: Test) {
     useTestNG {
-        suites 'src/test/resources/testing_groups.xml'
+        suites 'src/test/resources/testng_groups.xml'
     }
-    systemProperty 'browser', "${browser}"
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
 }
