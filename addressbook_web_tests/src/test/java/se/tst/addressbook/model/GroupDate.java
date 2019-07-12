@@ -19,7 +19,6 @@ public class GroupDate {
   @Column(name = "group_id")
   private int id = Integer.MAX_VALUE;
   @Column(name = "group_name")
-  @Type(type = "text")
   private String name;
   @Column(name = "group_header")
   @Type(type = "text")
