@@ -36,7 +36,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="se.tst.addressbook.model.GroupDate"/>
-
+        <mapping class="se.tst.addressbook.model.ContactDate"/>
     </session-factory>
 
 </hibernate-configuration>

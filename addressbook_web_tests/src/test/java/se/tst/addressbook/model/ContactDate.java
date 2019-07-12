@@ -2,36 +2,73 @@ package se.tst.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
+
+@Entity
+@Table(name = "addressbook")
 
 @XStreamAlias("contact")
 
 public class ContactDate {
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id;
+
+  @Column(name = "firstname")
   private String name;
+
+  @Column(name = "lastname")
   private String lastname;
+
+  @Transient
   private String group;
+
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
+  @Column(name = "home")
+  @Type(type = "text")
   private String tlfnhome;
+
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String tlfnmobile;
+
+  @Column(name = "work")
+  @Type(type = "text")
   private String tlfnwork;
+
+  @Transient
   private String allPhones;
+
+  @Column(name = "email")
+  @Type(type = "text")
   private String mail;
+
+  @Column(name = "email2")
+  @Type(type = "text")
   private String mail2;
+
+  @Column(name = "email3")
+  @Type(type = "text")
   private String mail3;
+
+  @Transient
   private String allMail;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
 
   public File getPhoto() {
-    return photo;
+    return new File (photo); //преобразование возращаемого значения из String в File(photo)
   }
 
   public int getId() {
@@ -152,7 +189,7 @@ public class ContactDate {
   }
 
   public ContactDate withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();  //извлекаем путь к файлу
     return this;
   }
 
