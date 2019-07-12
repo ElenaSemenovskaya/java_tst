@@ -3,7 +3,6 @@ package se.tst.addressbook.tests;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
-import se.tst.addressbook.model.GroupDate;
 
 import java.sql.*;
 
