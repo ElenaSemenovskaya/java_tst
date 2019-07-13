@@ -17,12 +17,13 @@ public class Contacts extends ForwardingSet<ContactDate> {
 
     public Contacts() {
         this.delegate = new HashSet<ContactDate> ();
-
     }
 
     public Contacts(Collection<ContactDate> contacts) {
         this.delegate = new HashSet<ContactDate>(contacts);
     }
+
+
 
     @Override
     protected Set<ContactDate> delegate() {
