@@ -37,7 +37,12 @@ public class ContactHelper extends HelperBase{
 
     type(By.name("address"), contact.getAddress());
     type(By.name("home"), contact.getHomePhone());
+    type(By.name("mobile"), contact.getMobilePhone());
+    type(By.name("work"), contact.getWorkPhone());
     type(By.name("email"),contact.getMail());
+    type(By.name("email2"),contact.getMail2());
+    type(By.name("email3"),contact.getMail3());
+
 
   }
 
@@ -159,6 +164,7 @@ public class ContactHelper extends HelperBase{
     initContactModificationById(contact.getId());
     String name = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String group = wd.findElement(By.name("group")).getAttribute("value");
     String address = wd.findElement(By.name("address")).getAttribute("value");
     String tlfnhome = wd.findElement(By.name("home")).getAttribute("value");
     String tlfnmobile = wd.findElement(By.name("mobile")).getAttribute("value");
@@ -168,7 +174,7 @@ public class ContactHelper extends HelperBase{
     String mail3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactDate()
-            .withId(contact.getId()).withName(name).withLastname(lastname).withAddress(address)
+            .withId(contact.getId()).withName(name).withLastname(lastname).withGroup(group).withAddress(address)
             .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork)
             .withMail(mail).withMail2(mail2).withMail3(mail3);
 

@@ -30,7 +30,8 @@ public class GroupModifyTest extends TestBase {
     assertEquals(app.group().count(), before.size());
     Groups after = app.db().groups();
     assertThat(after, CoreMatchers.equalTo(before.without(modifedGroup).withAdded(group)));
+    veryfiGroupListInUI();
 
   }
 
-  }
+}

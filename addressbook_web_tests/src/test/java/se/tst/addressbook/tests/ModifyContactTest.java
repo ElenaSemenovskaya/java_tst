@@ -33,14 +33,22 @@ public class ModifyContactTest extends TestBase {
           .withName("Name1")
           .withLastname("LastName1")
           .withPhoto(new File("src/test/resources/fix.png"))
-          .withGroup("tst10")
           .withAddress("Address")
           .withHomePhone("5555")
-          .withMail("mail@mail");
+          .withMobilePhone("7777")
+          .withWorkPhone("3333")
+          .withMail("mail@mail")
+          .withMail2("mail2")
+          .withMail3("mail3");
   app.contact().modify(contact);
-  assertEquals(app.contact().count(), before.size());
   Contacts after = app.db().contacts();
+  assertEquals(app.contact().count(), before.size());
+
+  //Contacts expected = before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()));
+  //assertThat(after, equalTo(expected));
+
   assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+  veryfiContactListInUI();
 
 }
 

@@ -25,6 +25,7 @@ public class ContactDate {
   @Column(name = "lastname")
   private String lastname;
 
+
   @Transient
   private String group;
 
@@ -66,6 +67,22 @@ public class ContactDate {
   @Type(type = "text")
   private String photo;
 
+
+  @Override
+  public String toString() {
+    return "ContactDate{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", tlfnhome='" + tlfnhome + '\'' +
+            ", tlfnmobile='" + tlfnmobile + '\'' +
+            ", tlfnwork='" + tlfnwork + '\'' +
+            ", mail='" + mail + '\'' +
+            ", mail2='" + mail2 + '\'' +
+            ", mail3='" + mail3 + '\'' +
+            '}';
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -213,16 +230,6 @@ public class ContactDate {
   public ContactDate withPhoto(File photo) {
     this.photo = photo.getPath();  //извлекаем путь к файлу
     return this;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactDate{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", group='" + group + '\'' +
-            '}';
   }
 
 }
