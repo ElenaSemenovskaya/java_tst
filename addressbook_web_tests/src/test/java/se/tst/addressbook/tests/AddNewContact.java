@@ -42,10 +42,8 @@ public class AddNewContact extends TestBase{
     contact.withPhoto(new File("src/test/resources/fix.png"));
     app.goTo().contactList();
     app.contact().create(contact, true);
-
-    assertThat(app.contact().count(), equalTo(before.size() +1));
     Contacts after = app.db().contacts();
-
+    assertThat(app.contact().count(), equalTo(before.size() +1));
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     veryfiContactListInUI();

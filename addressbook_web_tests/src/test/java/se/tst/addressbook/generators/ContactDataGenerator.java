@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ContactDataGenerator {
 
-    @Parameter(names = "-c", description = "GroupCount")
+    @Parameter(names = "-c", description = "ContactCount")
     public int count;
 
     @Parameter (names = "-f", description = "Target file")
@@ -61,9 +61,18 @@ public class ContactDataGenerator {
         System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
             for (ContactDate contact : contacts){
-                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getName(), contact.getLastname(),
-                        contact.getAddress(), contact.getGroup(),
-                        contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()));
+                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;s;%s;%s;%s\n"
+                        , contact.getName()
+                        , contact.getLastname()
+                        , contact.getPhoto()
+                        , contact.getAddress()
+                        , contact.getGroup()
+                        , contact.getHomePhone()
+                        , contact.getMobilePhone()
+                        , contact.getWorkPhone()
+                        , contact.getMail()
+                        , contact.getMail2()
+                        , contact.getMail3()));
             }
         }
     }
@@ -71,9 +80,19 @@ public class ContactDataGenerator {
     private List<ContactDate> generateContacts(int count) {
         List<ContactDate> contacts = new ArrayList<ContactDate>();
         for (int i = 0; i < count; i++)
-            contacts.add(new ContactDate().withName(String.format("Name %s", i)).withLastname(String.format("Lastame %s", i))
-                    .withAddress(String.format("Address %s", i)).withGroup(String.format("Group %s", i))
-                    .withHomePhone(String.format("HomePhone %s", i)).withMobilePhone(String.format("MobilePhone %s", i)).withWorkPhone(String.format("WorkPhone %s", i)));
+            contacts.add(new ContactDate()
+                    .withName(String.format("Name %s", i))
+                    .withLastname(String.format("Lastname %s", i))
+                    .withPhoto(new File("src/test/resources/fix.png"))
+                    .withAddress(String.format("Address %s", i))
+                    .withGroup(String.format("Group %s", i))
+                    .withHomePhone(String.format("HomePhone %s", i))
+                    .withMobilePhone(String.format("MobilePhone %s", i))
+                    .withWorkPhone(String.format("WorkPhone %s", i))
+                    .withMail(String.format("mail %s", i))
+                    .withMail2(String.format("2mail %s", i))
+                    .withMail3(String.format("3mail %s", i)));
+
             return contacts;
     }
 }
