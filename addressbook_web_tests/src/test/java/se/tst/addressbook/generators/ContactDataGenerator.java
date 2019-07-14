@@ -5,6 +5,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
 import se.tst.addressbook.model.ContactDate;
+import se.tst.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -61,12 +62,11 @@ public class ContactDataGenerator {
         System.out.println(new File(".").getAbsolutePath());
         try (Writer writer = new FileWriter(file)) {
             for (ContactDate contact : contacts){
-                writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;s;%s;%s;%s\n"
+                writer.write(String.format("%s;%s;%s;%s;%s;%s;s;%s;%s;%s\n"
                         , contact.getName()
                         , contact.getLastname()
                         , contact.getPhoto()
                         , contact.getAddress()
-                        , contact.getGroup()
                         , contact.getHomePhone()
                         , contact.getMobilePhone()
                         , contact.getWorkPhone()
@@ -85,7 +85,6 @@ public class ContactDataGenerator {
                     .withLastname(String.format("Lastname %s", i))
                     .withPhoto(new File("src/test/resources/fix.png"))
                     .withAddress(String.format("Address %s", i))
-                    .withGroup(String.format("Group %s", i))
                     .withHomePhone(String.format("HomePhone %s", i))
                     .withMobilePhone(String.format("MobilePhone %s", i))
                     .withWorkPhone(String.format("WorkPhone %s", i))

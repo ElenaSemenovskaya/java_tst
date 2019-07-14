@@ -31,8 +31,12 @@ public class ContactHelper extends HelperBase{
     attach(By.name("photo"), contact.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
-    } else
+      if (contact.getGroups().size() > 0) {
+        Assert.assertTrue(contact.getGroups().size() == 1);
+      }
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+    }
+      else
       Assert.assertFalse(isElementPresent(By.name("new_group")));
 
     type(By.name("address"), contact.getAddress());
@@ -174,7 +178,7 @@ public class ContactHelper extends HelperBase{
     String mail3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactDate()
-            .withId(contact.getId()).withName(name).withLastname(lastname).withGroup(group).withAddress(address)
+            .withId(contact.getId()).withName(name).withLastname(lastname).withAddress(address)
             .withHomePhone(tlfnhome).withMobilePhone(tlfnmobile).withWorkPhone(tlfnwork)
             .withMail(mail).withMail2(mail2).withMail3(mail3);
 

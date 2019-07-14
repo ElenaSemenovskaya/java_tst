@@ -5,6 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
+import se.tst.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,8 +39,11 @@ public class AddNewContact extends TestBase{
 
   @Test (dataProvider = "validContacts")
   public void testAddNewContact(ContactDate contact) throws Exception {
+    Groups groups = app.db().groups();
+    contact.withPhoto(new File("src/test/resources/fix.png")).inGroup(groups.iterator().next());
+
     Contacts before = app.db().contacts();
-    contact.withPhoto(new File("src/test/resources/fix.png"));
+
     app.goTo().contactList();
     app.contact().create(contact, true);
     Contacts after = app.db().contacts();

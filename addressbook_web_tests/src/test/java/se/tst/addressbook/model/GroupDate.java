@@ -4,11 +4,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
@@ -18,23 +17,6 @@ public class GroupDate {
   @Id
   @Column(name = "group_id")
   private int id = Integer.MAX_VALUE;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    GroupDate groupDate = (GroupDate) o;
-    return id == groupDate.id &&
-            Objects.equals(name, groupDate.name) &&
-            Objects.equals(header, groupDate.header) &&
-            Objects.equals(footer, groupDate.footer);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, header, footer);
-  }
-
   @Column(name = "group_name")
   private String name;
   @Column(name = "group_header")
@@ -44,8 +26,15 @@ public class GroupDate {
   @Type(type = "text")
   private String footer;
 
+  @ManyToMany(mappedBy = "groups")
+  private Set<ContactDate> contacts = new HashSet<ContactDate>();
+
   public int getId() {
     return id;
+  }
+
+  public Contacts getContacts() {
+    return new Contacts(contacts);
   }
 
   public GroupDate withId(int id) {
@@ -79,6 +68,27 @@ public class GroupDate {
   public String getFooter() {
     return footer;
   }
+
+
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    GroupDate groupDate = (GroupDate) o;
+    return id == groupDate.id &&
+            Objects.equals(name, groupDate.name) &&
+            Objects.equals(header, groupDate.header) &&
+            Objects.equals(footer, groupDate.footer);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, header, footer);
+  }
+
+
 
   @Override
   public String toString() {
