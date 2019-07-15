@@ -196,4 +196,15 @@ public class ContactHelper extends HelperBase{
     wd.findElement(By.xpath("//h1[text()='Groups']"));
     wd.findElement(By.cssSelector("a[href='./?group="+contactToAddGroup.getGroups().iterator().next().getId()+"']")).click();
   }
+
+  public void removeContactFromGroup(ContactDate contactRemoveFromGroup) {
+    Assert.assertEquals(contactRemoveFromGroup.getGroups().size(), 1);
+    Select groupSelect = new Select(wd.findElement(By.name("group")));
+    groupSelect.selectByVisibleText(contactRemoveFromGroup.getGroups().iterator().next().getName());
+    selectContactById(contactRemoveFromGroup.getId());
+    wd.findElement(By.name("remove")).click();
+    wd.findElement(By.xpath("//h1[text()='Groups']"));
+    wd.findElement(By.cssSelector("a[href='./?group="+contactRemoveFromGroup.getGroups().iterator().next().getId()+"']")).click();
+
+  }
 }

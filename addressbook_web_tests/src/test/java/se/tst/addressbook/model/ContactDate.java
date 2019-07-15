@@ -71,44 +71,6 @@ public class ContactDate {
   private Set<GroupDate> groups = new HashSet<GroupDate>();
 
 
-  @Override
-  public String toString() {
-    return "ContactDate{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
-            ", tlfnhome='" + tlfnhome + '\'' +
-            ", tlfnmobile='" + tlfnmobile + '\'' +
-            ", tlfnwork='" + tlfnwork + '\'' +
-            ", mail='" + mail + '\'' +
-            ", mail2='" + mail2 + '\'' +
-            ", mail3='" + mail3 + '\'' +
-            '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactDate that = (ContactDate) o;
-    return id == that.id &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(lastname, that.lastname) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(tlfnhome, that.tlfnhome) &&
-            Objects.equals(tlfnmobile, that.tlfnmobile) &&
-            Objects.equals(tlfnwork, that.tlfnwork) &&
-            Objects.equals(mail, that.mail) &&
-            Objects.equals(mail2, that.mail2) &&
-            Objects.equals(mail3, that.mail3);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, lastname, address, tlfnhome, tlfnmobile, tlfnwork, mail, mail2, mail3);
-  }
-
   public File getPhoto() {
     return new File (photo); //преобразование возращаемого значения из String в File(photo)
   }
@@ -229,6 +191,23 @@ public class ContactDate {
   public ContactDate withPhoto(File photo) {
     this.photo = photo.getPath();  //извлекаем путь к файлу
     return this;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactDate{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", tlfnhome='" + tlfnhome + '\'' +
+            ", tlfnmobile='" + tlfnmobile + '\'' +
+            ", tlfnwork='" + tlfnwork + '\'' +
+            ", mail='" + mail + '\'' +
+            ", mail2='" + mail2 + '\'' +
+            ", mail3='" + mail3 + '\'' +
+            ", groups=" + groups +
+            '}';
   }
 
   public ContactDate inGroup(GroupDate group) {
