@@ -26,7 +26,7 @@ public class GroupDate {
   @Type(type = "text")
   private String footer;
 
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
   private Set<ContactDate> contacts = new HashSet<ContactDate>();
 
   public int getId() {
