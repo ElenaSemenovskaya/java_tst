@@ -25,7 +25,7 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void fillContactForm(ContactDate contact, boolean creation) {
+  public void   fillContactForm(ContactDate contact, boolean creation) {
     type(By.name("firstname"), contact.getName());
     type(By.name("lastname"), contact.getLastname());
     attach(By.name("photo"), contact.getPhoto());
@@ -33,10 +33,9 @@ public class ContactHelper extends HelperBase{
     if (creation) {
       if (contact.getGroups().size() > 0) {
         Assert.assertTrue(contact.getGroups().size() == 1);
-      }
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
-    }
-      else
+      }
+    } else
       Assert.assertFalse(isElementPresent(By.name("new_group")));
 
     type(By.name("address"), contact.getAddress());

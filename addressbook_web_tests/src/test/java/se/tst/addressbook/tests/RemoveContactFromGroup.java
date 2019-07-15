@@ -15,12 +15,13 @@ public class RemoveContactFromGroup extends TestBase{
 
     @BeforeTest
     public void ensurePrecondition () {
-        Groups groups = app.db().groups();
         app.goTo().scrollContact();
+
         if (app.db().groups().size() == 0) {
             app.goTo().GroupPage();
             app.group().create(new GroupDate().withName("tst4"));
         }
+
         if (app.db().contacts().size() == 0) {
             app.goTo().contactList();
             app.contact().create(new ContactDate()
@@ -33,10 +34,11 @@ public class RemoveContactFromGroup extends TestBase{
                     .withWorkPhone("3333")
                     .withMail("mail@mail")
                     .withMail2("mail2")
-                    .withMail3("mail3")
-                    .inGroup(groups.iterator().next()), true);
+                    .withMail3("mail3"), true);
             app.goTo().scrollContact();
         }
+
+
     }
 
     @Test

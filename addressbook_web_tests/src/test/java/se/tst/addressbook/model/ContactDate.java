@@ -194,6 +194,28 @@ public class ContactDate {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactDate that = (ContactDate) o;
+    return id == that.id &&
+            Objects.equals(name, that.name) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(tlfnhome, that.tlfnhome) &&
+            Objects.equals(tlfnmobile, that.tlfnmobile) &&
+            Objects.equals(tlfnwork, that.tlfnwork) &&
+            Objects.equals(mail, that.mail) &&
+            Objects.equals(mail2, that.mail2) &&
+            Objects.equals(mail3, that.mail3);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, lastname, address, tlfnhome, tlfnmobile, tlfnwork, mail, mail2, mail3);
+  }
+
+  @Override
   public String toString() {
     return "ContactDate{" +
             "id=" + id +

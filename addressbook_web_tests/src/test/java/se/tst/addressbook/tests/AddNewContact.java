@@ -1,10 +1,12 @@
 package se.tst.addressbook.tests;
 
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
+import se.tst.addressbook.model.GroupDate;
 import se.tst.addressbook.model.Groups;
 
 import java.io.BufferedReader;
@@ -19,6 +21,15 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddNewContact extends TestBase{
+
+  @BeforeTest
+  public void ensurePreconditions () {
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupPage();
+      app.group().create(new GroupDate().withName("tst4"));
+    }
+  }
+
 
   @DataProvider
   public Iterator<Object[]> validContacts() throws IOException {
@@ -36,13 +47,11 @@ public class AddNewContact extends TestBase{
     }
   }
 
-
-  @Test (dataProvider = "validContacts")
+    @Test (dataProvider = "validContacts")
   public void testAddNewContact(ContactDate contact) throws Exception {
     Groups groups = app.db().groups();
-    contact.withPhoto(new File("src/test/resources/fix.png")).inGroup(groups.iterator().next());
-
     Contacts before = app.db().contacts();
+    contact.withPhoto(new File("src/test/resources/fix.png")).inGroup(groups.iterator().next());
 
     app.goTo().contactList();
     app.contact().create(contact, true);

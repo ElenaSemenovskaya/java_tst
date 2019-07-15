@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.Contacts;
+import se.tst.addressbook.model.GroupDate;
 import se.tst.addressbook.model.Groups;
 
 import java.io.File;
@@ -17,6 +18,12 @@ public class ModifyContactTest extends TestBase {
   @BeforeMethod
   public void ensurePrecondition () {
     Groups groups = app.db().groups();
+
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupPage();
+      app.group().create(new GroupDate().withName("tst4"));
+    }
+
     app.goTo().scrollContact();
     if (app.db().contacts().size() == 0) {
       app.goTo().contactList();
@@ -30,8 +37,7 @@ public class ModifyContactTest extends TestBase {
               .withWorkPhone("3333")
               .withMail("mail@mail")
               .withMail2("mail2")
-              .withMail3("mail3")
-              .inGroup(groups.iterator().next()), true);
+              .withMail3("mail3"), true);
       app.goTo().scrollContact();
     }
   }
