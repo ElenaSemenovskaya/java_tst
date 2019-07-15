@@ -47,7 +47,7 @@ public class AddNewContact extends TestBase{
     }
   }
 
-    @Test (dataProvider = "validContacts")
+  @Test (dataProvider = "validContacts")
   public void testAddNewContact(ContactDate contact) throws Exception {
     Groups groups = app.db().groups();
     Contacts before = app.db().contacts();

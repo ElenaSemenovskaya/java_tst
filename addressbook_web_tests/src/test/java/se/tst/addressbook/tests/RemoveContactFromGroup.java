@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.GroupDate;
-import se.tst.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -13,9 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RemoveContactFromGroup extends TestBase{
 
+    private ContactDate beforeContact;
+
     @BeforeTest
     public void ensurePrecondition () {
-        app.goTo().scrollContact();
 
         if (app.db().groups().size() == 0) {
             app.goTo().GroupPage();
@@ -38,20 +38,24 @@ public class RemoveContactFromGroup extends TestBase{
             app.goTo().scrollContact();
         }
 
-
+        if (beforeContact == null) {
+            app.goTo().scrollContact();
+            beforeContact = app.db().contacts().iterator().next().inGroup(app.db().groups().iterator().next());
+            app.contact().addContactToGroup(beforeContact);
+        }
     }
 
     @Test
     public void testRemoveContactFromGroup () {
         app.goTo().scrollContact();
-        ContactDate beforeContactRemoveFromGroup = app.db().contacts().iterator().next();
+        ContactDate beforeContact = app.db().contacts().iterator().next();
         GroupDate beforeGroup= app.db().groups().iterator().next();
-        app.contact().removeContactFromGroup(beforeContactRemoveFromGroup.inGroup(beforeGroup));
-        app.db().updateContact(beforeContactRemoveFromGroup);
+        app.contact().removeContactFromGroup(beforeContact.inGroup(beforeGroup));
+        app.db().updateContact(beforeContact);
         app.db().updateGroup(beforeGroup);
-        ContactDate afterContactRemoveFromGroup = app.db().contacts().iterator().next();
+        ContactDate afterContact = app.db().contacts().iterator().next();
         GroupDate afterGroup= app.db().groups().iterator().next();
-        assertThat(afterContactRemoveFromGroup.getGroups(), CoreMatchers.not(beforeGroup));
-        assertThat(afterGroup.getContacts(), CoreMatchers.not(beforeContactRemoveFromGroup));
+        assertThat(afterContact.getGroups(), CoreMatchers.not(beforeGroup));
+        assertThat(afterGroup.getContacts(), CoreMatchers.not(beforeContact));
     }
 }

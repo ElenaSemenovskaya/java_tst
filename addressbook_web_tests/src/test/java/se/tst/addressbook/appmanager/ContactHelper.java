@@ -10,7 +10,6 @@ import se.tst.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase{
@@ -188,6 +187,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void addContactToGroup(ContactDate contactToAddGroup) {
+    Assert.assertEquals(contactToAddGroup.getGroups().size(), 1);
     selectContactById(contactToAddGroup.getId());
     Select groupSelect = new Select(wd.findElement(By.name("to_group")));
     groupSelect.selectByVisibleText(contactToAddGroup.getGroups().iterator().next().getName());

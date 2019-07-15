@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
 import se.tst.addressbook.model.GroupDate;
-import se.tst.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -13,14 +12,16 @@ import static org.hamcrest.Matchers.hasItem;
 
 public class AddContactToGroup  extends TestBase{
 
+    private ContactDate beforeContact;
+
     @BeforeTest
     public void ensurePrecondition () {
-        Groups groups = app.db().groups();
-        app.goTo().scrollContact();
+
         if (app.db().groups().size() == 0) {
             app.goTo().GroupPage();
             app.group().create(new GroupDate().withName("tst4"));
         }
+
         if (app.db().contacts().size() == 0) {
             app.goTo().contactList();
             app.contact().create(new ContactDate()
@@ -33,23 +34,28 @@ public class AddContactToGroup  extends TestBase{
                     .withWorkPhone("3333")
                     .withMail("mail@mail")
                     .withMail2("mail2")
-                    .withMail3("mail3")
-                    .inGroup(groups.iterator().next()), true);
+                    .withMail3("mail3"), true);
             app.goTo().scrollContact();
+        }
+
+        for (ContactDate contact : app.db().contacts()) {
+            if (contact.getGroups().size() == 1){
+                beforeContact = contact;
+            }
         }
     }
 
     @Test
     public void testAddContactToGroup () {
         app.goTo().scrollContact();
-        ContactDate beforeContactToAddGroup = app.db().contacts().iterator().next();
-        GroupDate beforeGroupToAdd= app.db().groups().iterator().next();
-        app.contact().addContactToGroup(beforeContactToAddGroup.inGroup(beforeGroupToAdd));
-        app.db().updateContact(beforeContactToAddGroup);
-        app.db().updateGroup(beforeGroupToAdd);
-        ContactDate afterContactToAddGroup = app.db().contacts().iterator().next();
-        GroupDate afterGroupToAdd= app.db().groups().iterator().next();
-        assertThat(afterContactToAddGroup.getGroups(), hasItem(beforeGroupToAdd));
-        assertThat(afterGroupToAdd.getContacts(), hasItem(beforeContactToAddGroup));
+        ContactDate beforeContact = app.db().contacts().iterator().next();
+        GroupDate beforeGroup= app.db().groups().iterator().next();
+        app.contact().addContactToGroup(beforeContact.inGroup(beforeGroup));
+        app.db().updateContact(beforeContact);
+        app.db().updateGroup(beforeGroup);
+        ContactDate afterContact = app.db().contacts().iterator().next();
+        GroupDate afterGroup= app.db().groups().iterator().next();
+        assertThat(afterContact.getGroups(), hasItem(beforeGroup));
+        assertThat(afterGroup.getContacts(), hasItem(beforeContact));
     }
 }
