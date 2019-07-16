@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = "se.tst.sandbox.FirstProgram"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.testng:testng:6.14.3'
+    compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-1'
+    compile 'org.hamcrest:hamcrest:2.1'
+
+
+}
+
+test {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+    if (project.hasProperty('browser')) {  //при запуске тестов указывать браузер
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {  //указывать конф. файл, который описывает свойста окружения
+        systemProperty 'target', "${target}"
+    }
+
+    if (project.hasProperty('verifyUI')) {  //вкл(выкл) сложные проверки через пользовательский интерфейс
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
