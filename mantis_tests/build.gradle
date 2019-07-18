@@ -24,7 +24,7 @@ dependencies {
 
 test {
     useTestNG {
-        suites 'src/test/resources/testng.xml'
+        //suites 'src/test/resources/testng.xml'
     }
     if (project.hasProperty('browser')) {  //при запуске тестов указывать браузер
         systemProperty 'browser', "${browser}"

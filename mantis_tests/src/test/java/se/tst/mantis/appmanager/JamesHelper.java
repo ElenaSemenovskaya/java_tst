@@ -73,19 +73,19 @@ public class JamesHelper {
 
     private String readUntil(String s) {
         try {
-            char lastChar = pattern.charAt(pattern.length() - 1);
+            //char lastChar = pattern.charAt(pattern.length() - 1);
             StringBuffer sb = new StringBuffer();
-            char ch = (char) in.read();
+        //    char ch = (char) in.read();
             while (true) {
-                System.out.println(ch);
-                sb.append(ch);
-                if (ch == lastChar) {
-                    if (sb.toString().endsWith(pattern)); {
+        //        System.out.println(ch);
+        //        sb.append(ch);
+         //       if (ch == lastChar) {
+         //           if (sb.toString().endsWith(pattern)); {
                         return sb.toString();
                     }
-                }
-                ch = (char) in.read();
-            }
+        //        }
+        //        ch = (char) in.read();
+         //   }
         }
         catch (Exception e) {
             e.printStackTrace();
