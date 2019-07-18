@@ -1,5 +1,6 @@
 package se.tst.addressbook.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import se.tst.addressbook.model.ContactDate;
