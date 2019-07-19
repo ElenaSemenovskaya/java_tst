@@ -71,7 +71,7 @@ public class ApplicationManager {
         wd = new InternetExplorerDriver();
       }
       wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-      wd.get(properties.getProperty("web.baseURL"));
+      wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
   }
