@@ -9,9 +9,9 @@ import java.io.File;
 
 public class HelperBase {
 
+  protected ApplicationManager app;
   protected WebDriver wd;
 
-  protected ApplicationManager app;
   public HelperBase(WebDriver wd) {
     this.wd = wd;
   }

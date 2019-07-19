@@ -77,7 +77,7 @@ public class ApplicationManager {
   }
 
   public MailHelper mail() {
-    if (mailHelper == null) {
+    if (mailHelper == null) {  //ленивая инициализация
       mailHelper = new  MailHelper(this);
     }
     return mailHelper;
