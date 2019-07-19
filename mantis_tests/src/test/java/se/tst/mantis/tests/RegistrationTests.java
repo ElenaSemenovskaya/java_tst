@@ -1,5 +1,7 @@
 package se.tst.mantis.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class RegistrationTests extends TestBase{
 
-    @BeforeMethod
+    //@BeforeMethod // нужно отключить для внешнего почтового сервера
     public void startMailServer(){
         app.mail().start();
     }
@@ -26,15 +28,16 @@ public class RegistrationTests extends TestBase{
         String password = "password";
         String email = String.format("user%s@localhost.localdomain", now);
 
-        //app.james().createUser(user, password);
+        app.james().createUser(user, password); //создание пользователя на внешнем почтовом сервере перед регистрацией
 
         app.registartion().start(user, email);
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); //встроенный почтовый сервер. Ожидание письма. Список писем
-        //List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000); //внешний почтовый сервер
+        //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); //встроенный почтовый сервер. Ожидание письма. Список писем
+        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000); //внешний почтовый сервер
 
         String confirmationLink = findConfirmationLink(mailMessages, email); //среди писем нужно найти то, которое отпр. на этот адрес и извлечь ссылку
         app.registartion().finish(confirmationLink, password);
         assertTrue(app.newSession().login(user, password)); //проверка по протоколу http
+        logger.info("Stop testRegistration");
 
     }
 
@@ -44,7 +47,7 @@ public class RegistrationTests extends TestBase{
         return regex.getText(mailMessage.text); //возвращает кусок текста, который соот-ет построенному регулярному выражению
     }
 
-    @AfterMethod(alwaysRun = true)
+    //@AfterMethod(alwaysRun = true) // нужно отключить для внешнего почтового сервера
     public void stopMailServer(){
         app.mail().stop();
     }
