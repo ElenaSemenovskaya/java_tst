@@ -18,10 +18,12 @@ public class ApplicationManager {
   private WebDriver wd;
 
   private String browser;
-  private RegistrationHelper registartionHelper;
+  private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private DbHelper dbHelper;
+
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -29,8 +31,10 @@ public class ApplicationManager {
   }
 
   public void init() throws IOException {
+    dbHelper = new DbHelper();
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
   }
 
   public void stop() {
@@ -47,12 +51,13 @@ public class ApplicationManager {
     return properties.getProperty(key);
   }
 
-  public RegistrationHelper registartion() {
-    if (registartionHelper == null) {  //инициализируем при первом обращении к методу
-      registartionHelper = new RegistrationHelper(this);
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {  //инициализируем при первом обращении к методу
+      registrationHelper = new RegistrationHelper(this);
     }
-    return registartionHelper;
+    return registrationHelper;
   }
+
 
   public FtpHelper ftp() {
     if (ftp == null) {
@@ -88,5 +93,17 @@ public class ApplicationManager {
       jamesHelper = new  JamesHelper(this);
     }
     return jamesHelper;
+  }
+
+  public AdminHelper admin(){
+    return new AdminHelper(this);
+  }
+
+  public DbHelper db() {
+    return dbHelper;
+  }
+
+  public UserHalper user(){
+    return new UserHalper(this);
   }
 }
