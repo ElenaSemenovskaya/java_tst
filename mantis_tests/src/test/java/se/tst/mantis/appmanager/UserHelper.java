@@ -9,9 +9,9 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 
-public class UserHalper extends HelperBase {
+public class UserHelper extends HelperBase {
 
-    public UserHalper(ApplicationManager app) {
+    public UserHelper(ApplicationManager app) {
         super(app);
     }
 
@@ -19,8 +19,10 @@ public class UserHalper extends HelperBase {
         app.getDriver().findElement(By.cssSelector("a[href='/mantisbt-2.21.1/manage_overview_page.php']")).click();
         app.getDriver().findElement(By.linkText("manage_users_link")).click();
         UserData user = app.db().users().iterator().next();
-        app.getDriver().findElement(By.linkText(user.getUserName())).click();
-        app.getDriver().findElement(By.cssSelector("input[value='Reset Password']")).click();
+        if (user.getUserName() != "administrator") {
+            app.getDriver().findElement(By.linkText(user.getUserName())).click();
+            app.getDriver().findElement(By.cssSelector("input[value='Reset Password']")).click();
+        }
         return user;
     }
 

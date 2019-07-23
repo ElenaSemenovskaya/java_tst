@@ -20,9 +20,9 @@ public class ResetPasswordTests extends TestBase {
 
     @Test
     public void testResetPassword() throws IOException, MessagingException {
-        String adminlogin = "administrator";
+        String adminLogin = "administrator";
         String adminPsw = "root";
-        app.admin().loginAdmin(adminlogin, adminPsw);
+        app.admin().loginAdmin(adminLogin, adminPsw);
         UserData user = app.user().resetPassword();
         String new_password = app.user().settingNewPassword(user);
         HttpSession session = app.newSession();
