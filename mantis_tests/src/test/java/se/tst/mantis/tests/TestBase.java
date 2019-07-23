@@ -1,8 +1,5 @@
 package se.tst.mantis.tests;
 
-import biz.futureware.mantis.rpc.soap.client.IssueData;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +13,7 @@ import se.tst.mantis.appmanager.ApplicationManager;
 import javax.xml.rpc.ServiceException;
 import java.io.File;
 import java.lang.reflect.Method;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 
@@ -30,11 +25,7 @@ public class TestBase {
           = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
   public boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-    MantisConnectPortType mc = getMantisConnect();
-    //получаем список запросов пользователя администратор
-    IssueData issueData = mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
-    //получаем статус запроса
-    String status = issueData.getStatus().getName();
+    String status = app.soap().getStatus(issueId);
     if(status.equals("closed")){
       return false;
     }
@@ -46,12 +37,6 @@ public class TestBase {
       throw new SkipException("Ignored because of issue " + issueId);
     }
   }
-
-  public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
-    return new MantisConnectLocator()
-            .getMantisConnectPort(new URL(app.getProperty("web.soapUrl")));
-  }
-
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {

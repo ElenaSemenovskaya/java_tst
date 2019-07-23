@@ -1,14 +1,10 @@
 package se.tst.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.org.apache.xpath.internal.objects.XObject;
-import org.testng.Assert;
 import se.tst.mantis.model.Issue;
 import se.tst.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,10 +30,19 @@ public class SoapHelper {
                 .withId(p.getId().intValue()).withName(p.getName())).collect(Collectors.toSet());
     }
 
+    public String getStatus(int issueId) throws ServiceException, MalformedURLException, RemoteException {
+        MantisConnectPortType mc = getMantisConnect();
+        //получаем список запросов пользователя администратор
+        IssueData issueData = mc.mc_issue_get(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"), BigInteger.valueOf(issueId));
+        //получаем статус запроса
+        return issueData.getStatus().getName();
+    }
+
     public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
         return new MantisConnectLocator()
                     .getMantisConnectPort(new URL(app.getProperty("web.soapUrl")));
     }
+
 
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = getMantisConnect(); //открываем соединение
