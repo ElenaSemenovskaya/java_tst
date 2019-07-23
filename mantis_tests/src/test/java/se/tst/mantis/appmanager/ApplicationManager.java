@@ -112,6 +112,6 @@ public class ApplicationManager {
     if (soapHelper == null){
       soapHelper = new SoapHelper(this);
     }
-    return new SoapHelper(this);
+    return soapHelper;
   }
 }
