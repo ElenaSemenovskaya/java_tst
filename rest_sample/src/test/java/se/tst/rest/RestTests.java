@@ -9,11 +9,8 @@ import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.Test;
 
-
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
-
 
 import static org.testng.Assert.assertEquals;
 
@@ -32,12 +29,12 @@ public class RestTests {
     private Set<Issue> getIssues() throws IOException {
         String json = getExecutor()
                 .execute(Request.Get("http://bugify.stqa.ru/api/issues.json?limit=500"))
-                .returnContent().asString();//авторизация + получить спи/issues.сок багрепортов в формате json
+                .returnContent().asString();//авторизация + получить список/issues. багрепортов в формате json
         JsonElement parsed = new JsonParser().parse(json); //анализируем строчку, получаем json элемент
         //по ключу извлекаем нужную часть
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         //преобразование полученного issues в множество объектов типа Issue
-        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType()); //пока заглушка
+        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
     }
 
     private Executor getExecutor() {

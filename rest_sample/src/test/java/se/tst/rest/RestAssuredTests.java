@@ -5,9 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jayway.restassured.RestAssured;
-import org.apache.http.client.fluent.Executor;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -16,7 +13,7 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestAssuredTests {
+public class RestAssuredTests extends TestBase{
 
     @BeforeClass
     public void init(){
@@ -26,6 +23,7 @@ public class RestAssuredTests {
 
     @Test
     public void testCreateIssue() throws IOException {
+        skipIfNotFixed(1666);
         Set<Issue> oldIssues = getIssues(); //получаем множество запросов до добавления нового
         Issue newIssue = new Issue().withSubject("Tst_issue").withDescription("Tst_description"); //создаем новый объект
         int issueId = createIssue(newIssue); //вызываем метод create
@@ -35,7 +33,7 @@ public class RestAssuredTests {
     }
 
     private Set<Issue> getIssues() throws IOException {
-        String json = RestAssured.get("http://bugify.stqa.ru/api/issues.json?limit=500").asString();//авторизация + получить список /issues. багрепортов в формате json
+        String json = RestAssured.get("http://bugify.stqa.ru/api/issues.json?limit=10000").asString();//авторизация + получить список /issues. багрепортов в формате json
         JsonElement parsed = new JsonParser().parse(json); //анализируем строчку, получаем json элемент
         //по ключу извлекаем нужную часть
         JsonElement issues = parsed.getAsJsonObject().get("issues");
@@ -47,7 +45,7 @@ public class RestAssuredTests {
         String json = RestAssured.given()
                 .parameter("subject", newIssue.getSubject())
                 .parameter("description", newIssue.getDescription())
-                .post("http://bugify.stqa.ru/api/issues.json?limit=500").asString();
+                .post("http://bugify.stqa.ru/api/issues.json?limit=10000").asString();
 
         JsonElement parsed = new JsonParser().parse(json);
         //ид созданного багрепорта
