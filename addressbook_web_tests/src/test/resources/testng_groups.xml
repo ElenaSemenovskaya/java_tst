@@ -4,6 +4,8 @@
     <test name="Groups">
         <classes>
             <class name="se.tst.addressbook.tests.GroupModifyTest"/>
+            <class name="se.tst.addressbook.tests.DeleteGroupTest"/>
+            <class name="se.tst.addressbook.tests.GroupCreationTest"/>
         </classes>
     </test>
 </suite>
